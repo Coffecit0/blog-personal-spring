@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Layout</title>
+</head>
+<body>
+
+<!--HEADER-->
+<div th:fragment="header-app">
+    <header class="p-2 mb-2 border-bottom bg-dark text-white">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container">
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link font-header-items" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link font-header-items" href="#">My posts</a>
+                            </li>
+                        </ul>
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle font-header-items" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>Username</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Log out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+</div>
+
+</body>
+</html>

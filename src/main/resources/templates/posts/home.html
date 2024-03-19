@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!-- BOOTSTRAP CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<div th:include="posts/layout.html::header-app"></div>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="mb-3">
+                <h1 class="mt-5">Latest Posts</h1>
+                <a href="#" class="btn btn-success"> New Post</a>
+            </div>
+            <div th:each="post : ${posts}" class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${post.title}"></h5>
+                    <p class="card-text" th:text="${post.content}"></p>
+                    <a href="#" class="btn btn-secondary float-end mt-2">Read More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h2 class="mt-5">Search by Title</h2>
+            <form class="input-group" action="#" method="get">
+                <input type="text" class="form-control" placeholder="Search by title..." name="title" aria-label="Search" aria-describedby="search-btn">
+                <button class="btn btn-outline-secondary" type="submit" id="search-btn">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+        <span class="text-muted">© Blog Personal Coffeecito 2024</span>
+    </div>
+</footer>
+
+<!-- BOOTSTRAP JS -->
+<script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
