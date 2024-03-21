@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Page</title>
+  <!-- BOOTSTRAP CSS -->
+  <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<!-- HEADER -->
+<div th:include="posts/layout.html::header-app"></div>
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title" th:text="${post.title}"></h5>
+      <span th:text="${post.createdAt}"></span>
+    </div>
+    <div class="card-body">
+      <p class="card-text" th:text="${post.content}"></p>
+    </div>
+
+    <!-- comment -->
+
+    <div class="card-footer">
+      <form action="#" method="post">
+        <div class="mb-3">
+          <input type="hidden" name="" value="0" />
+          <label for="content" class="form-label">Add a comment:</label>
+          <textarea class="form-control" id="content" name="" rows="3" autocomplete="off"></textarea>
+        </div>
+        <div class="text-end">
+          <button type="submit" class="btn btn-secondary">Comment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- BOOTSTRAP JS -->
+<script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

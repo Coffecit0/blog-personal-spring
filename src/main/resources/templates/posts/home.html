@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${post.title}"></h5>
                     <p class="card-text" th:text="${post.content}"></p>
-                    <a href="#" class="btn btn-secondary float-end mt-2">Read More</a>
+                    <a th:href="@{/post/postPage/{id} (id=${post.id})}" class="btn btn-secondary float-end mt-2">Read More</a>
                 </div>
             </div>
         </div>

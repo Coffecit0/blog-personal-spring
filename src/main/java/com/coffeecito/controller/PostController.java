@@ -1,5 +1,6 @@
 package com.coffeecito.controller;
 
+import com.coffeecito.entity.CommentEntity;
 import com.coffeecito.entity.PostEntity;
 import com.coffeecito.entity.UserEntity;
 import com.coffeecito.service.PostService;
@@ -9,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequestMapping("/post")
@@ -46,4 +49,22 @@ public class PostController {
         return "redirect:/post/home";
     }
 
+    @GetMapping("/postPage/{id}")
+    public String postPage(@PathVariable Long id ,Model model) {
+        PostEntity post = postService.getPostById(id).orElseThrow(() -> new IllegalArgumentException("¡Invalid post id!"));
+        List<CommentEntity> comments = post.getComments();
+
+        model.addAttribute("post", post);
+        model.addAttribute("comments", comments);
+        return "/posts/post-page";
+    }
+
+    @GetMapping("/mine")
+    public String myPosts(Model model, HttpSession session) {
+        Long userId = Long.parseLong(session.getAttribute("user_session_id").toString());
+        List<PostEntity> posts = postService.getPostByUserId(userId);
+
+        model.addAttribute("posts", posts);
+        return "/posts/my-post";
+    }
 }
