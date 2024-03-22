@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>My Posts</title>
   <!-- BOOTSTRAP CSS -->
   <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 </head>
@@ -18,9 +18,9 @@
             <h3 class="card-title" th:text="${post.title}"></h3>
             <p class="card-text" th:text="${post.createdAt}"></p>
             <p class="card-text" th:text="${post.content}"></p>
-            <a th:href="@{/post/postPage/{id} (id=${post.id}) }" class="btn btn-primary me-2">See</a>
-            <a th:href="@{/post/edit/{id} (id=${post.id}) }" class="btn btn-warning me-2">Edit</a>
-            <a th:href="@{/post/delete/{id} (id=${post.id}) }" class="btn btn-danger float-end">Delete</a>
+            <a th:href="@{/post/postPage/{id} (id=${post.id}) }" class="btn btn-primary me-2"><img src="/img/see.png" alt="see"></a>
+            <a th:href="@{/post/edit/{id} (id=${post.id}) }" class="btn btn-warning me-2"><img src="/img/edit.png" alt="edit"></a>
+            <a th:href="@{/post/delete/{id} (id=${post.id}) }" class="btn btn-danger float-end"><img src="/img/delete.png" alt="delete"></a>
         </div>
     </div>
 </div>

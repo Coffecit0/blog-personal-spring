@@ -15,6 +15,7 @@
   <div class="card">
     <div class="card-header">
       <h5 class="card-title" th:text="${post.title}"></h5>
+      <strong><p class="text-danger" th:text="${post.user.username}"></p></strong>
       <span th:text="${post.createdAt}"></span>
     </div>
     <div class="card-body">
@@ -33,8 +34,8 @@
             <p class="mb-0" th:text="${comment.content}"></p>
             <!-- buttons -->
             <div th:if="${ user != null && user.id == comment.user.id}">
-              <a class="btn btn-sm btn-warning me-1" th:href="@{/comment/edit/{id} (id=${comment.id}) }">edit</a>
-              <a class="btn btn-sm btn-danger me-1" th:href="@{/comment/delete/{id} (id=${comment.id}) }">delete</a>
+              <a class="btn btn-sm btn-warning me-1" th:href="@{/comment/edit/{id} (id=${comment.id}) }"><img src="/img/edit_comment.png" alt="edit_comment"></a>
+              <a class="btn btn-sm btn-danger me-1" th:href="@{/comment/delete/{id} (id=${comment.id}) }"><img src="/img/delete_comment.png" alt="delete_comment"></a>
             </div>
           </div>
         </li>

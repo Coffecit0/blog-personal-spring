@@ -42,17 +42,23 @@ public class CommentController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editComment(@PathVariable Long id, Model model) {
+    public String editComment(@PathVariable Long id ,Model model) {
         CommentEntity comment = commentService.getCommentById(id).orElseThrow(() -> new IllegalArgumentException("¡Invalid comment id!"));
-        model.addAttribute("comment", comment);
+        model.addAttribute("comment",comment);
         return "/posts/update-comment";
     }
 
     @PostMapping("/update")
-    public String updateComment(@RequestParam("idComment") Long id, CommentEntity comment) {
+    public String updateComment(@RequestParam("commentId") Long id, CommentEntity comment) {
         CommentEntity commentDB = commentService.getCommentById(id).orElseThrow(() -> new IllegalArgumentException("¡Invalid comment id!"));
         commentService.updateComment(id, comment);
         return "redirect:/post/postPage/" + commentDB.getPost().getId();
+    }
+
+    @GetMapping("/cancel/{id}")
+    public String cancelEditComment(@PathVariable Long id) {
+        CommentEntity comment = commentService.getCommentById(id).orElseThrow(() -> new IllegalArgumentException("¡Invalid comment id!"));
+        return "redirect:/post/postPage/" + comment.getPost().getId();
     }
 
     @GetMapping("/delete/{id}")

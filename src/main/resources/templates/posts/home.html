@@ -16,7 +16,7 @@
         <div class="col-md-8">
             <div class="mb-3">
                 <h1 class="mt-5">Latest Posts</h1>
-                <a th:href="@{/post/new}" class="btn btn-success"> New Post</a>
+                <a th:href="@{/post/new}" class="btn btn-success"><img src="/img/plus.png" alt="plus"> New Post</a>
             </div>
             <div th:each="post : ${posts}" class="card mb-3">
                 <div class="card-body">
@@ -28,7 +28,7 @@
         </div>
         <div class="col-md-4">
             <h2 class="mt-5">Search by Title</h2>
-            <form class="input-group" action="#" method="get">
+            <form class="input-group" th:action="@{/post/search}" method="get">
                 <input type="text" class="form-control" placeholder="Search by title..." name="title" aria-label="Search" aria-describedby="search-btn">
                 <button class="btn btn-outline-secondary" type="submit" id="search-btn">Search</button>
             </form>

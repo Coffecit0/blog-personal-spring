@@ -83,4 +83,11 @@ public class PostController {
         postService.deletePostById(id);
         return "redirect:/post/mine";
     }
+
+    @GetMapping("/search")
+    public String searchPosts(@RequestParam("title") String title, Model model) {
+        List<PostEntity> posts = postService.searchPostByTitle(title);
+        model.addAttribute("posts", posts);
+        return "/posts/home";
+    }
 }
