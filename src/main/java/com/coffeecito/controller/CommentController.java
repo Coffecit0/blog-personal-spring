@@ -9,9 +9,8 @@ import com.coffeecito.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -40,5 +39,26 @@ public class CommentController {
 
         commentService.createComment(comment);
         return "redirect:/post/postPage/" + postId;
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editComment(@PathVariable Long id, Model model) {
+        CommentEntity comment = commentService.getCommentById(id).orElseThrow(() -> new IllegalArgumentException("¡Invalid comment id!"));
+        model.addAttribute("comment", comment);
+        return "/posts/update-comment";
+    }
+
+    @PostMapping("/update")
+    public String updateComment(@RequestParam("idComment") Long id, CommentEntity comment) {
+        CommentEntity commentDB = commentService.getCommentById(id).orElseThrow(() -> new IllegalArgumentException("¡Invalid comment id!"));
+        commentService.updateComment(id, comment);
+        return "redirect:/post/postPage/" + commentDB.getPost().getId();
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteComment(@PathVariable Long id) {
+        CommentEntity comment = commentService.getCommentById(id).orElseThrow(() -> new IllegalArgumentException("¡Invalid comment id!"));
+        commentService.deleteComment(id);
+        return "redirect:/post/postPage/" + comment.getPost().getId();
     }
 }
