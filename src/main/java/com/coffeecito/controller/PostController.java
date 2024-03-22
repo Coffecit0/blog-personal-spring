@@ -9,10 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -66,5 +63,24 @@ public class PostController {
 
         model.addAttribute("posts", posts);
         return "/posts/my-post";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editPost(@PathVariable Long id ,Model model) {
+        PostEntity post = postService.getPostById(id).orElseThrow(() -> new IllegalArgumentException("¡Invalid post id!"));
+        model.addAttribute("post",post);
+        return "/posts/update-post";
+    }
+
+    @PostMapping("/update")
+    public String updatePost(@RequestParam("idPost") Long id, PostEntity post) {
+        postService.updatePost(id, post);
+        return "redirect:/post/mine";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deletePost(@PathVariable Long id) {
+        postService.deletePostById(id);
+        return "redirect:/post/mine";
     }
 }

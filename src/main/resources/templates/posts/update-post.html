@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Post</title>
+  <!-- BOOTSTRAP CSS -->
+  <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<!-- HEADER -->
+<div th:include="posts/layout.html::header-app"></div>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h3>Update Post</h3>
+        </div>
+        <div class="card-body">
+          <form th:action="@{/post/update}" method="post">
+            <input type="hidden" name="idPost" th:value="${post.id}">
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title" name="title" th:value="${post.title}">
+            </div>
+            <div class="mb-3">
+              <label for="content" class="form-label">Content</label>
+              <textarea class="form-control" id="content" name="content" rows="20" th:text="${post.content}"></textarea>
+            </div>
+            <div class="text-end">
+              <a class="btn btn-danger" th:href="@{/post/mine}">Cancel</a>
+              <button type="submit" class="btn btn-secondary">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOTSTRAP JS -->
+<script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
